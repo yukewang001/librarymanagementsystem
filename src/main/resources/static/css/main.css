@@ -1,0 +1,55 @@
+
+
+hr {
+    height: 5px;
+    padding: 0;
+    margin: 0;
+    background-color: black;
+}
+
+a {
+    color: #000000;
+}
+.top {
+    width: 100%;
+    height: 80px;
+    background: url(../img/maintop.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+
+.top-message {
+    top: 55px;
+    position: absolute;
+    width: 90%;
+    padding-left: 10px;
+}
+
+.navbar {
+    padding: 0;
+    margin: 0;
+    height: 25px;
+}
+
+.footer {
+    width: 100%;
+    height: 20px; /* footer的高度一定要是固定值*/
+    position: absolute;
+    bottom: 2px;
+    left: 0px;
+    background-color: bisque;
+
+}
+
+.top-font {
+    color: #f3e9dee6;
+}
+
+.font-link {
+    color: #51ae16;
+}
+
+address {
+    margin: 0;
+}

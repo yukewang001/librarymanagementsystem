@@ -1,0 +1,79 @@
+#端口，项目上下文配置 tomcat
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  error: /error
+  tomcat:
+    uri-encoding: utf-8
+spring:
+  #热部署
+  devtools:
+    restart:
+      enabled: true
+      exclude: templates
+  freemarker:
+    cache: false
+  #数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/librarymanagementsystem?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+    username: root
+    password: yukewang
+    type: com.alibaba.druid.pool.DruidDataSource
+    #Spring Boot 默认是不注入这些属性值的，需要自己绑定
+    #druid 数据源专有配置
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+
+      #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+      #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
+      #则导入 log4j 依赖即可，Maven 地址：https://mvnrepository.com/artifact/log4j/log4j
+      filters: stat,wall,log4j
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      logSlowSql: true
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" #不统计这些请求数据
+      stat-view-servlet: #访问监控网页的登录用户名和密码
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+          # allow: 127.0.0.1
+          # druid访问地址:http://localhost:port/context-path/druid/login.html 账号&密码
+        login-username: 1
+        login-password: 1
+    #页面设置
+  thymeleaf:
+    suffix: .html
+    prefix: classpath:/templates/
+    cache: true
+    #redis
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    database: 0
+    password: yukewang
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    database-platform: org.hibernate.dialect.MySQLDialect
+#    show-sql: true
+mybatis:
+  type-aliases-package: com.librarymanagementsystem.pojo
+  mapper-locations: classpath:mapping/*Mapper.xml
+
+

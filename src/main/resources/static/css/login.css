@@ -1,0 +1,36 @@
+@media (min-width: 1200px) {
+    .container {
+        max-width: 100%;
+    }
+}
+
+body {
+
+    background: url(../img/loginbg.jpg);
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    background-size:cover;
+    -moz-background-size:cover;
+    -webkit-background-size:cover;
+
+}
+
+
+label, a {
+    color: coral;
+}
+
+.form-control {
+    /* width: 80%; */
+    margin: 0;
+    background-color: beige;
+}
+
+.container {
+    position: absolute;
+    margin-top: 15%;
+}
+
+.error-message {
+    color: #930808;
+}

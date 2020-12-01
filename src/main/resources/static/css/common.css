@@ -1,0 +1,17 @@
+.hide {
+    display: none;
+}
+
+.input-group-text {
+    background-color: #e9ecef0d;
+    border: 0px;
+}
+
+body {
+    /*overflow-x: hidden;*/
+    overflow-y: hidden;
+}
+.check-message{
+    font-size: 13px;
+    color: #a71d2a;
+}

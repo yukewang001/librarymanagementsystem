@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.librarymanagementsystem.mapper.IUserMapper">
+    <resultMap id="optionMap" type="java.util.HashMap">
+        <result property="key" column="user_typeid" javaType="java.lang.Integer"/>
+        <result property="value" column="user_type" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="selectByUsername" resultType="String" parameterType="String">
+        select *
+        from user
+        WHERE user_name = #{user_name}
+    </select>
+    <select id="selectByUserId" resultType="User" parameterType="Int">
+        select *
+        from user
+        WHERE id = #{id}
+    </select>
+    <select id="selectByUserPassword" resultType="User" parameterType="String">
+        select *
+        from user
+        WHERE user_name = #{user_name}
+          and user_password = #{user_password}
+    </select>
+    <select id="selectByUsers" resultType="User" parameterType="String">
+        select * from user
+        WHERE 1=1
+        <if test="user_type =='用户'">
+            and user_name = #{user_name}
+        </if>
+        <if test="user_type =='管理员'">
+            and user_type != '超级管理员'
+        </if>
+    </select>
+    <select id="getOptions" resultMap="optionMap">
+        select distinct user_typeid, user_type
+        from user
+        where 1 = 1
+    </select>
+    <insert id="addUser" parameterType="User">
+        insert into user(user_name, user_password, user_num, user_createtime, user_typeid, user_type, user_text)
+        values (#{user_name}, #{user_password}, #{user_num}, #{user_createtime}, #{user_typeid}, #{user_type},
+                #{user_text})
+    </insert>
+    <update id="updateUser" parameterType="User">
+        update user
+        set user_name       = #{user_name},
+            user_password   = #{user_password},
+            user_num        = #{user_num},
+            user_createtime = #{user_createtime},
+            user_typeid     = #{user_typeid},
+            user_type       = #{user_type},
+            user_text       = #{user_text}
+        where id = #{id}
+    </update>
+</mapper>
